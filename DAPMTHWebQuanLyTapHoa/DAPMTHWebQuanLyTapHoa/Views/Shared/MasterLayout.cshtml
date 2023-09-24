@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+
+    <!-- font awsome -->
+    <script src="https://kit.fontawesome.com/383abdf887.js" crossorigin="anonymous"></script>
+
+    <!-- sử dụng boxicon  -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    @*css*@
+    <link href="@Url.Content("~/Content/masterlayout.css")" rel="stylesheet" type="text/css" />
+
+
+    <!-- gg font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    @* inner css *@
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sidebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 130vh;
+            width: 80px;
+            /*background-color: #12171e;*/
+            padding: 0.4rem 0rem;
+            transition: all 0.5s ease;
+            /*background-color: #1d5b79;
+            background-image: linear-gradient(160deg, #0F2027 16%, #203A43 53%, #2C5364 100%);*/
+            background-color: #d2de32;
+            background-image: linear-gradient(315deg, #d2de32 20%, #273c16 75%);
+        }
+
+            .sidebar.active ~ .main-content {
+                left: 250px;
+                width: calc(100% - 250px);
+            }
+
+            .sidebar.active {
+                width: 250px;
+            }
+
+            .sidebar #btn {
+                position: absolute;
+                color: #fff;
+                top: 0;
+                left: 50%;
+                font-size: 1.2rem;
+                line-height: 50px;
+                transform: translateX(-50%);
+                cursor: pointer;
+            }
+
+            .sidebar.active #btn {
+                left: 90%;
+            }
+
+            .sidebar .top .logo {
+                color: #fff;
+                display: flex;
+                height: 50px;
+                width: 100%;
+                align-items: center;
+                pointer-events: none;
+                opacity: 0;
+            }
+
+            .sidebar.active .top .logo {
+                opacity: 1;
+            }
+
+        .top .logo i {
+            font-size: 2rem;
+            margin-right: 5px;
+        }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        .sidebar p {
+            opacity: 0;
+        }
+
+        .sidebar.active p {
+            opacity: 1;
+        }
+
+        .sidebar ul li {
+            position: relative;
+            list-style-type: none;
+            height: 50px;
+            width: 70%;
+            margin: 0.8rem auto;
+            /*line-height: 50px;*/
+        }
+
+            .sidebar ul li a {
+                color: #fff;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                border-radius: 0.8rem;
+            }
+
+                .sidebar ul li a:hover {
+                    background-color: #fff;
+                    color: #12171e;
+                }
+
+                .sidebar ul li a i {
+                    min-width: 50px;
+                    text-align: center;
+                    height: 50px;
+                    border-radius: 12px;
+                    line-height: 50px;
+                }
+
+        .sidebar .nav-item {
+            opacity: 0;
+        }
+
+        .sidebar.active .nav-item {
+            opacity: 1;
+        }
+
+        .sidebar ul li .tooltip {
+            position: absolute;
+            left: 125px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+            border-radius: 0 .6rem;
+            padding: .4rem 1.2rem;
+            line-height: 1.8rem;
+            z-index: 20;
+            opacity: 0;
+        }
+
+        .sidebar ul li:hover .tooltip {
+            opacity: 1;
+        }
+
+        .sidebar.active ul li .tooltip {
+            display: none;
+        }
+
+        .main-content {
+            position: relative;
+            background-color: #fff;
+            min-height: 100vh;
+            /*top: 0;*/
+            left: 80px;
+            transition: all 0.5s ease;
+            width: calc(100% - 80px);
+            padding: 1rem;
+        }
+    </style>
+
+    <!-- BEGIN HEADER  -->
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div class="nav-around container-fluid">
+                <!-- nav brand -->
+                <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")">
+                    <img style="width: 80px; height: 80px; border-radius: 50%;" src="~/Content/images/logobrand.jpg" alt="Alternate Text" />
+                </a>
+
+                <!-- nav main -->
+                <div class="nav-main">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" style="position: relative; top: 20px;">
+                            <a class="navNameOfStore nav-sp nav-link active" aria-current="page" href="@Url.Action("Index", "TrangChu")">Quản lý Cửa Hàng Tạp Hóa</a>
+                        </li>
+                        <!-- <li class="nav-item" style=" position: relative; top: 30px;">
+                            <a class="nav-link active" aria-current="page" href="#">Quản lý Đơn hàng</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <div id="cover">
+                                <form method="get" action="">
+                                    <div class="tb">
+                                        <div class="td">
+                                            <input style="border: none;" />
+                                        </div>
+                                        <div class="td" id="s-cover">
+                                            <button type="submit" style="border: none;">
+                                                <div id="s-circle"></div>
+                                                <span></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- nav end -->
+                <div class="nav-end">
+                    <a href="#"><i class="nav-icon fa-solid fa-user"></i></a>
+                    <div class="dropdown">
+                        <i style="color: #ffffff;" class="nav-icon fa-solid fa-bars fa-flip fa-lg" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" href="#">Thông tin Cửa hàng</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Đăng Xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @* ----------------PHẦN NỘI DUNG CHÍNH NÈ ---------------- *@
+    <div class="container-fluid" @*style="margin: 20px 20px 0px"*@>
+        <!-- phần content sidebar -->
+        <div class="sidebar">            
+            <div class="top">
+                <div class="logo">
+                    <i class="bx bxl-codepen"></i>
+                    <span>Tạp Hóa</span>
+                </div>
+                <i class="bx bx-menu" id="btn"></i>
+            </div>
+
+            <ul style="padding: 0px;">
+                <li>
+                    <a href="@Url.Action("Index", "SanPhams")">
+                        <i class="bx bxs-grid-alt"></i>
+                        <span class="nav-item">Sản Phẩm</span>
+                    </a>
+                    <span class="tooltip">SP</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "LoaiSPs")">
+                        <i class="bx bxs-shopping-bag"></i>
+                        <span class="nav-item">Loại Sản Phẩm</span>
+                    </a>
+                    <span class="tooltip">LSP</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "NhaCungCaps")">
+                        <i class="bx bx-list-check"></i>
+                        <span class="nav-item">Nhà CC</span>
+                    </a>
+                    <span class="tooltip">NCC</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "DonHangs")">
+                        <i class="bx bxs-food-menu"></i>
+                        <span class="nav-item">Đơn Hàng</span>
+                    </a>
+                    <span class="tooltip">ĐH</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "ChiTietDonHangs")">
+                        <i class="bx bx-body"></i>
+                        <span class="nav-item">CT Đơn Hàng</span>
+                    </a>
+                    <span class="tooltip">CTĐH</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "NhapHangs")">
+                        <i class="bx bx-location-plus"></i>
+                        <span class="nav-item">Nhập hàng</span>
+                    </a>
+                    <span class="tooltip">NH</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "UserIDs")">
+                        <i class='bx bx-user-pin'></i>
+                        <span class="nav-item">Nhân viên</span>
+                    </a>
+                    <span class="tooltip">NV</span>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "UserIDs")">
+                        <i class="bx bx-log-out"></i>
+                        <span class="nav-item">Đăng xuất</span>
+                    </a>
+                    <span class="tooltip">ĐX</span>
+                </li>
+            </ul>
+
+            @*<div class="loader"></div>*@
+        </div>
+
+        @*// truyền dữ liệu của từng trang *@
+        <div class="main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+<footer>
+    <p class="all-right-reserved">&copy;2021 Tiệm tạp hóa | All Rights Reserved</p>
+</footer>
+
+    <script>
+        let btn = document.querySelector('#btn')
+        let sidebar = document.querySelector('.sidebar')
+
+        btn.onclick = function () {
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

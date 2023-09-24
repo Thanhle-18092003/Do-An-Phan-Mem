@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8209ae0193f45d79ca13be3f6ef28d1" Name="Diagram1">
+        <EntityTypeShape EntityType="DoAnPhanMemModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.DonHang" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.LoaiSP" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.NhaCungCap" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.NhanVien" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.NhapHang" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnPhanMemModel.SanPham" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_CTDHMaDH" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_CTDHMaSP" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_DonHangMaUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_SanPhamML" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_NhapHangMaNCC" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnPhanMemModel.FK_NhapHangMaSP" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
